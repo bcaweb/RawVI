@@ -1,0 +1,114 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  color: #1f2937;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background: #1e293b;
+  color: #fff;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .logo {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #60a5fa;
+}
+
+.sidebar a {
+  padding: 15px 25px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: #334155;
+  color: #fff;
+}
+
+.sidebar i {
+  margin-right: 10px;
+}
+
+.admin-info {
+  padding: 20px;
+  text-align: center;
+  background-color: #0f172a;
+}
+
+.logout-btn {
+  color: #f87171;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.logout-btn:hover {
+  color: #ef4444;
+}
+
+/* Main Dashboard */
+.main-dashboard {
+  margin-left: 250px;
+  padding: 40px;
+}
+
+.main-dashboard h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: #3b82f6;
+}
