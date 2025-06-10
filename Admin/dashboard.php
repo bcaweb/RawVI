@@ -280,7 +280,7 @@ if (isset($_SESSION['upload_error'])) {
         <i class="fas fa-folder-open"></i> Content <i class="fas fa-caret-down caret-icon"></i>
       </button>
       <div class="dropdown-menu" id="mediaDropdown">
-        <a href="#" onclick="openUploadModal()"><i class="fas fa-cloud-upload-alt"></i> Upload Content</a>
+        <a href="upload.php"><i class="fas fa-cloud-upload-alt"></i> Upload Content</a>
         <a href="view.php"><i class="fas fa-eye"></i> View Content</a>
         <a href="update-list.php"><i class="fas fa-edit"></i> Update Content</a>
         <a href="delete-list.php"><i class="fas fa-trash-alt"></i> Delete Content</a>
