@@ -26,7 +26,7 @@ if (isset($_SESSION['upload_error'])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RawVI Admin Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dash.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     /* Sidebar dropdown */
@@ -272,7 +272,7 @@ if (isset($_SESSION['upload_error'])) {
 <body>
   <div class="sidebar">
     <h2 class="logo">RawVI Admin</h2>
-    <a href="#"><i class="fas fa-compass"></i> Explore</a>
+    <a href="#"><i class="fas fa-compass"></i> Search</a>
 
     <!-- Dropdown -->
     <div class="dropdown">
@@ -282,8 +282,8 @@ if (isset($_SESSION['upload_error'])) {
       <div class="dropdown-menu" id="mediaDropdown">
         <a href="upload.php"><i class="fas fa-cloud-upload-alt"></i> Upload Content</a>
         <a href="view.php"><i class="fas fa-eye"></i> View Content</a>
-        <a href="update-list.php"><i class="fas fa-edit"></i> Update Content</a>
-        <a href="delete-list.php"><i class="fas fa-trash-alt"></i> Delete Content</a>
+        <a href="update.php"><i class="fas fa-edit"></i> Update Content</a>
+        <a href="delete.php"><i class="fas fa-trash-alt"></i> Delete Content</a>
       </div>
     </div>
 
@@ -297,6 +297,8 @@ if (isset($_SESSION['upload_error'])) {
       <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
   </div>
+
+ 
 
   <div class="main-dashboard">
     <h1>📊 Dashboard Overview</h1>
@@ -323,340 +325,22 @@ if (isset($_SESSION['upload_error'])) {
       </div>
     </div>
   </div>
-
-  <!-- Upload Modal -->
-  <div id="uploadModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeUploadModal()">&times;</span>
-      <h2><i class="fas fa-upload"></i> Upload New Content</h2>
-      
-      <form id="uploadForm" method="post" action="upload-handler.php" enctype="multipart/form-data">
-        <div class="form-group">
-          <input type="text" name="content_name" id="content_name" placeholder="Content Name" required />
-          <div class="form-error" id="content_name_error">Content name is required</div>
-        </div>
-
-        <div class="form-group">
-          <select name="category" id="category" required>
-            <option value="" disabled selected>Select Category</option>
-            <option value="Nature">Nature</option>
-            <option value="Tech">Tech</option>
-            <option value="People">People</option>
-            <option value="Animals">Animals</option>
-            <option value="Architecture">Architecture</option>
-            <option value="Sports">Sports</option>
-            <option value="Food">Food</option>
-            <option value="Travel">Travel</option>
-            <option value="Art">Art</option>
-            <option value="Music">Music</option>
-          </select>
-          <div class="form-error" id="category_error">Please select a category</div>
-        </div>
-
-        <div class="form-group">
-          <select name="content_type" id="content_type" required>
-            <option value="" disabled selected>Content Type</option>
-            <option value="image">Image</option>
-            <option value="video">Video</option>
-          </select>
-          <div class="form-error" id="content_type_error">Please select content type</div>
-        </div>
-
-        <div class="form-group">
-          <textarea name="content_desc" id="content_desc" placeholder="Content Description" rows="3" required></textarea>
-          <div class="form-error" id="content_desc_error">Content description is required</div>
-        </div>
-
-        <div class="form-group">
-          <input type="file" name="media_file" id="media_file" accept="image/*,video/*" required />
-          <div class="form-error" id="media_file_error">Please select a file</div>
-          <small style="color: #666; font-size: 0.8rem; margin-top: 5px; display: block;">
-            Supported formats: JPG, PNG, GIF, MP4, MOV, AVI, WEBM (Max: 50MB)
-          </small>
-        </div>
-
-        <div class="progress-container" id="progressContainer">
-          <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <button type="submit" id="submitBtn">
-          <i class="fas fa-upload"></i> Upload Content
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- JavaScript -->
-  <script>
-    // Dropdown functionality
-    function toggleDropdown() {
-      const dropdown = document.getElementById("mediaDropdown");
-      const caretIcon = document.querySelector(".caret-icon");
-      
-      dropdown.classList.toggle("show");
-      
-      if (dropdown.classList.contains("show")) {
-        caretIcon.style.transform = "rotate(180deg)";
-      } else {
-        caretIcon.style.transform = "rotate(0deg)";
-      }
-    }
-
-    // Modal functionality
-    function openUploadModal() {
-      document.getElementById("uploadModal").style.display = "block";
-      document.body.style.overflow = "hidden"; // Prevent background scrolling
-    }
-
-    function closeUploadModal() {
-      document.getElementById("uploadModal").style.display = "none";
-      document.body.style.overflow = "auto"; // Restore scrolling
-      resetForm();
-    }
-
-    // Reset form function
-    function resetForm() {
-      document.getElementById("uploadForm").reset();
-      clearErrors();
-      hideProgress();
-    }
-
-    // Clear all error messages
-    function clearErrors() {
-      const errors = document.querySelectorAll('.form-error');
-      const inputs = document.querySelectorAll('.input-error');
-      
-      errors.forEach(error => error.style.display = 'none');
-      inputs.forEach(input => input.classList.remove('input-error'));
-    }
-
-    // Show error for specific field
-    function showError(fieldId, message) {
-      const field = document.getElementById(fieldId);
-      const error = document.getElementById(fieldId + '_error');
-      
-      field.classList.add('input-error');
-      error.textContent = message;
-      error.style.display = 'block';
-    }
-
-    // Form validation
-    function validateForm() {
-      let isValid = true;
-      clearErrors();
-
-      // Validate content name
-      const contentName = document.getElementById('content_name').value.trim();
-      if (!contentName) {
-        showError('content_name', 'Content name is required');
-        isValid = false;
-      } else if (contentName.length < 3) {
-        showError('content_name', 'Content name must be at least 3 characters');
-        isValid = false;
-      }
-
-      // Validate category
-      const category = document.getElementById('category').value;
-      if (!category) {
-        showError('category', 'Please select a category');
-        isValid = false;
-      }
-
-      // Validate content type
-      const contentType = document.getElementById('content_type').value;
-      if (!contentType) {
-        showError('content_type', 'Please select content type');
-        isValid = false;
-      }
-
-      // Validate description
-      const contentDesc = document.getElementById('content_desc').value.trim();
-      if (!contentDesc) {
-        showError('content_desc', 'Content description is required');
-        isValid = false;
-      } else if (contentDesc.length < 10) {
-        showError('content_desc', 'Description must be at least 10 characters');
-        isValid = false;
-      }
-
-      // Validate file
-      const mediaFile = document.getElementById('media_file');
-      if (!mediaFile.files[0]) {
-        showError('media_file', 'Please select a file');
-        isValid = false;
-      } else {
-        const file = mediaFile.files[0];
-        const maxSize = 50 * 1024 * 1024; // 50MB
-        
-        if (file.size > maxSize) {
-          showError('media_file', 'File size must be less than 50MB');
-          isValid = false;
-        }
-
-        // Validate file type
-        const allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'mp4', 'mov', 'avi', 'webm'];
-        const fileExtension = file.name.split('.').pop().toLowerCase();
-        
-        if (!allowedTypes.includes(fileExtension)) {
-          showError('media_file', 'Invalid file type. Allowed: ' + allowedTypes.join(', '));
-          isValid = false;
-        }
-      }
-
-      return isValid;
-    }
-
-    // Show progress bar
-    function showProgress() {
-      document.getElementById('progressContainer').style.display = 'block';
-    }
-
-    // Hide progress bar
-    function hideProgress() {
-      document.getElementById('progressContainer').style.display = 'none';
-      document.getElementById('progressBar').style.width = '0%';
-    }
-
-    // Update progress bar
-    function updateProgress(percent) {
-      document.getElementById('progressBar').style.width = percent + '%';
-    }
-
-    // Form submission with AJAX
-    document.getElementById('uploadForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      if (!validateForm()) {
-        return;
-      }
-
-      const submitBtn = document.getElementById('submitBtn');
-      const originalText = submitBtn.innerHTML;
-      
-      // Disable submit button and show loading
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<div class="spinner"></div>Uploading...';
-      
-      showProgress();
-      
-      // Simulate progress (you can implement real progress with XMLHttpRequest)
-      let progress = 0;
-      const progressInterval = setInterval(function() {
-        progress += Math.random() * 15;
-        if (progress > 90) progress = 90;
-        updateProgress(progress);
-      }, 200);
-
-      // Create FormData and submit
-      const formData = new FormData(this);
-      
-      fetch('upload-handler.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(data => {
-        clearInterval(progressInterval);
-        updateProgress(100);
-        
-        setTimeout(() => {
-          hideProgress();
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-          
-          // Check if upload was successful (you might want to return JSON from PHP)
-          if (data.includes('successful') || data.includes('success')) {
-            closeUploadModal();
-            showMessage('Content uploaded successfully!', 'success');
-            
-            // Refresh page after 2 seconds to show updated content
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-          } else {
-            showMessage('Upload failed: ' + data, 'error');
-          }
-        }, 500);
-      })
-      .catch(error => {
-        clearInterval(progressInterval);
-        hideProgress();
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        showMessage('Upload failed: ' + error.message, 'error');
-      });
-    });
-
-    // Show success/error messages
-    function showMessage(message, type) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = 'message ' + type + '-message';
-      messageDiv.textContent = message;
-      messageDiv.style.display = 'block';
-      document.body.appendChild(messageDiv);
-      
-      // Hide after 4 seconds
-      setTimeout(() => {
-        messageDiv.style.display = 'none';
-        document.body.removeChild(messageDiv);
-      }, 4000);
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-      const modal = document.getElementById("uploadModal");
-      if (event.target === modal) {
-        closeUploadModal();
-      }
-    };
-
-    // Handle escape key to close modal
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeUploadModal();
-      }
-    });
-
-    // Show PHP messages on page load
-    window.addEventListener('load', function() {
-      <?php if (!empty($upload_message)): ?>
-        showMessage('<?php echo addslashes($upload_message); ?>', 'success');
-      <?php endif; ?>
-      
-      <?php if (!empty($error_message)): ?>
-        showMessage('<?php echo addslashes($error_message); ?>', 'error');
-      <?php endif; ?>
-    });
-
-    // File input change handler
-    document.getElementById('media_file').addEventListener('change', function() {
-      const file = this.files[0];
-      if (file) {
-        const fileSize = (file.size / 1024 / 1024).toFixed(2); // Size in MB
-        const fileName = file.name;
-        
-        // Clear any previous errors
-        this.classList.remove('input-error');
-        document.getElementById('media_file_error').style.display = 'none';
-        
-        // Show file info
-        const fileInfo = document.createElement('small');
-        fileInfo.style.color = '#666';
-        fileInfo.style.fontSize = '0.8rem';
-        fileInfo.style.marginTop = '5px';
-        fileInfo.style.display = 'block';
-        fileInfo.textContent = `Selected: ${fileName} (${fileSize} MB)`;
-        
-        // Remove any existing file info
-        const existingInfo = this.parentNode.querySelector('.file-info');
-        if (existingInfo) {
-          existingInfo.remove();
-        }
-        
-        fileInfo.className = 'file-info';
-        this.parentNode.appendChild(fileInfo);
-      }
-    });
-  </script>
 </body>
 </html>
+<script>
+  function toggleDropdown() {
+    document.getElementById("mediaDropdown").classList.toggle("show");
+  }
+
+  // Optional: Close dropdown if clicked outside
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropdown-toggle') && !event.target.closest('.dropdown-toggle')) {
+      const dropdowns = document.getElementsByClassName("dropdown-menu");
+      for (let i = 0; i < dropdowns.length; i++) {
+        if (dropdowns[i].classList.contains('show')) {
+          dropdowns[i].classList.remove('show');
+        }
+      }
+    }
+  }
+  </script>
