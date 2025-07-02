@@ -2,5 +2,5 @@
 session_start();
 session_destroy();
 unset($_SESSION['email']);
-header("location:https://localhost/RawVi/Admin/index.php");
+header("location:https://localhost/RawVi/Admin/adminindex.php");
 ?>

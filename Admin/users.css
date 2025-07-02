@@ -1,0 +1,198 @@
+/* users.css */
+
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+}
+
+/* Sidebar styles (assumed .sidebar class) */
+.sidebar {
+  width: 220px;
+  background: #2f3542;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Main container */
+.main-container {
+  flex: 1;
+  padding: 20px 30px;
+  background: #fff;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header h1 {
+  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #555;
+  font-weight: 600;
+}
+
+/* Table styles */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #444;
+}
+
+.user-table thead {
+  background-color: #2f3542;
+  color: #fff;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Zebra striping */
+.user-table tbody tr:nth-child(even) {
+  background-color: #f1f2f6;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .main-container {
+    margin-top: 20px;
+    border-radius: 0;
+  }
+  /* Table responsiveness */
+  .user-table thead {
+    display: none;
+  }
+  .user-table,
+  .user-table tbody,
+  .user-table tr,
+  .user-table td {
+    display: block;
+    width: 100%;
+  }
+  .user-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+  }
+  .user-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  .user-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: left;
+    color: #555;
+  }
+}
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit, .btn-delete {
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+
+.btn-edit {
+    background-color: #007bff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+/* Flex header layout */
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Add User Button Styling */
+.btn-add-user {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+    transition: background 0.3s, box-shadow 0.3s;
+    gap: 8px;
+}
+
+.btn-add-user:hover {
+    background: linear-gradient(135deg, #0072ff, #0056cc);
+    box-shadow: 0 6px 14px rgba(0, 114, 255, 0.5);
+}
+
+.material-icons {
+    font-size: 20px;
+}
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}

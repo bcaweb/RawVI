@@ -1,4 +1,4 @@
-/* General Reset */
+/* =============== General Reset =============== */
 * {
   margin: 0;
   padding: 0;
@@ -6,176 +6,178 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Body */
-body {
-  display: flex;
+html, body {
+  height: 100%;
+  overflow: hidden;
   background-color: #f4f6f9;
   color: #333;
-  min-height: 100vh;
 }
 
-/* Sidebar */
+/* =============== Sidebar =============== */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 250px;
-  background-color: #2e3a59;
-  padding: 20px;
+  height: 100vh;
+  background-color: #2e3a59; /* Darker sidebar color */
   color: white;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1000;
 }
 
 .sidebar h2.logo {
-  margin-bottom: 30px;
-  font-size: 24px;
-  color: #fff;
+  font-size: 24px; 
+  margin-bottom: 30px; 
 }
 
+/* Sidebar Links */
 .sidebar a,
 .sidebar button.dropdown-toggle {
-  color: #ddd;
-  padding: 12px 10px;
-  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 10px;
-  border: none;
-  background: none;
-  cursor: pointer;
+  padding: 12px 10px; 
+  color: #ddd; 
+  text-decoration: none; 
   font-size: 16px;
+  background: none; 
+  border: none; 
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .sidebar a:hover,
 .sidebar button.dropdown-toggle:hover {
-  background-color: #1d2538;
-  border-radius: 5px;
-  color: #fff;
-}
-
-/* Dropdown menu inside sidebar */
-.dropdown {
-  display: flex;
-  flex-direction: column;
-}
-
-.dropdown-menu {
-  display: none;
-  flex-direction: column;
-  margin-left: 20px;
-}
-
-.dropdown-menu.show {
-  display: flex;
+  background-color: #1d2538; /* Hover state */
+  border-radius: 5px; 
+  color: #fff; 
 }
 
 .dropdown-menu a {
-  padding: 8px 10px;
-  font-size: 15px;
-  color: #ccc;
-  transition: color 0.2s ease;
+  color: #ccc; 
 }
 
 .dropdown-menu a:hover {
-  color: #fff;
+  color: #fff; /* Hover color change */
 }
 
-/* Admin Info */
-.admin-info {
-  margin-top: auto;
-  padding-top: 20px;
+/* =============== Main Wrapper =============== */
+.main-container {
+  margin-left: 250px; 
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+  overflow: hidden; 
 }
 
-.admin-info p {
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #aaa;
+/* =============== Header =============== */
+.header {
+  height: 70px; 
+  background-color: #ffffff; 
+  border-bottom: 1px solid #e0e0e0; 
+  padding: 20px 30px; 
+  display: flex; 
+  align-items: center; 
+  position: sticky; 
+  top: 0; 
+  z-index: 500; 
 }
 
-.logout-btn {
-  display: inline-block;
-  padding: 8px 12px;
-  background-color: #d9534f;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
+.header h1 {
+  font-size: 26px; 
+  color: #2e3a59; 
 }
 
-.logout-btn:hover {
-  background-color: #c9302c;
-}
-
-/* Main Dashboard */
+/* =============== Main Dashboard =============== */
 .main-dashboard {
-  flex: 1;
-  padding: 30px;
+  flex: 1; 
+  overflow-y: auto; 
+  padding: 30px; 
+  background-color: #f4f6f9; 
 }
 
-.main-dashboard h1 {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #2e3a59;
+.main-dashboard h2 {
+  font-size: 24px; 
+  margin-bottom: 20px; 
 }
 
-/* Cards */
+/* =============== Cards =============== */
 .cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 20px; 
 }
 
 .card {
-  background-color: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: white; 
+  padding: 20px; 
+  border-radius: 12px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+  text-align: center; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
 }
 
 .card-icon {
-  font-size: 30px;
-  margin-bottom: 10px;
-  color: #2e86de;
+  font-size: 30px; 
+  margin-bottom: 10px; 
+  color: #2e86de; 
 }
 
 .card h3 {
-  margin-bottom: 5px;
-  font-size: 18px;
+  font-size: 18px; 
+  margin-bottom: 5px; 
 }
 
 .card p {
-  font-size: 16px;
-  font-weight: bold;
-  color: #444;
+  font-size: 16px; 
+  font-weight: bold; 
+  color: #444; 
 }
 
-/* Responsive (optional) */
+/* =============== Footer =============== */
+.footer {
+  background-color: #2e3a59; 
+  color: #ccc; 
+  text-align: center; 
+  padding: 15px 30px; 
+  font-size: 14px; 
+  border-top: 1px solid #1c2437; 
+}
+
+.footer a {
+  color: #ccc; 
+  text-decoration: none; 
+  margin: 0 5px; 
+}
+
+.footer a:hover {
+  color: #fff; 
+}
+
+/* =============== Responsive =============== */
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
+  .sidebar {
+    width: 100%; 
   }
 
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 10px;
+  .main-container {
+    margin-left: 0; 
   }
 
   .main-dashboard {
-    padding: 15px;
+    padding: 15px; 
   }
 
   .cards-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr; 
   }
 }

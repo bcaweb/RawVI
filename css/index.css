@@ -1,0 +1,76 @@
+/* File: css/home.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+a {
+    color: #2980b9;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pin-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.pin {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+    transition: 0.3s ease-in-out;
+}
+
+.pin:hover {
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.1);
+}
+
+.pin img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    max-height: 180px;
+}
+
+.pin h3 {
+    margin: 10px 0 5px;
+    color: #34495e;
+}
+
+.pin p {
+    font-size: 14px;
+    color: #666;
+}
+
+.pin small {
+    display: block;
+    margin-top: 8px;
+    color: #888;
+}

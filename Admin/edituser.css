@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+}
+
+.edit-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+}
+
+.card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+button {
+    background: #28a745;
+    color: white;
+    padding: 12px;
+    border: none;
+    margin-top: 25px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #218838;
+}
+
+.error-msg {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-left: 5px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
