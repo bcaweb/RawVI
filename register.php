@@ -1,70 +1,66 @@
 <?php
-include 'db.php'; // ✅ your database connection
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include 'db.php';
 session_start();
 
-// Handle POST only
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
+    $phone = trim($_POST["phone"]);
 
-    // Basic validation
-    if (empty($username) || empty($email) || empty($password)) {
-        die("Please fill in all fields.");
-    }
-
-    // Check if user exists
-    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows > 0) {
-        echo "⚠ Email is already registered.";
-        exit();
-    }
-
-    // Hash password
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-    // Default role: 1 = normal user (0 = admin)
-    $roleid = 1;
-
-    // Insert new user
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password, roleid) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $username, $email, $hashedPassword, $roleid);
-
-    if ($stmt->execute()) {
-        // Auto login and redirect to homepage
-        $_SESSION['user_id'] = $stmt->insert_id;
-        $_SESSION['username'] = $username;
-        $_SESSION['roleid'] = $roleid;
-        header("Location: home.php"); // change to your home page
-        exit();
+    if (empty($username) || empty($email) || empty($password) || empty($phone)) {
+        $error = "Please fill in all fields.";
     } else {
-        echo "❌ Something went wrong during registration.";
+        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $error = "Email is already registered.";
+        } else {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $role = "user";
+            $created_at = date("Y-m-d H:i:s");
+
+            $stmt = $conn->prepare("INSERT INTO users (role, username, email, password, phone, created_at) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $role, $username, $email, $hashedPassword, $phone, $created_at);
+
+            if ($stmt->execute()) {
+                $_SESSION['user_id'] = $stmt->insert_id;
+                $_SESSION['username'] = $username;
+                $_SESSION['role'] = $role;
+                header("Location: home.php");
+                exit();
+            } else {
+                $error = "Registration failed. Please try again.";
+            }
+        }
     }
-} else {
-    echo "Invalid request.";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Register</title>
+  <title>Register — RawVI</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="container">
     <h2>Create Account</h2>
-    <form action="register.php" method="post">
+    <?php if (isset($error)) echo "<div class='error'>$error</div>"; ?>
+    <form method="post" action="register.php">
       <input type="text" name="username" placeholder="Username" required />
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
+      <input type="text" name="phone" placeholder="Contact Number" required />
       <button type="submit">Register</button>
     </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
+    <p>Already have an account? <a href="login.php">Login here</a>.</p>
   </div>
 </body>
 </html>

@@ -1,0 +1,175 @@
+/* profile.css - Premium Light Version */
+
+body {
+  background-color: #f9f9f9; /* Soft light background */
+  color: #333333; /* Dark text for readability */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tabs */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 16px auto 12px; /* ✅ tighter spacing between tabs & content */
+}
+
+.tab-toggle {
+  background: #ffffff;
+  border: 1.5px solid #dce3eb;
+  padding: 10px 24px;
+  border-radius: 999px;
+  color: #0066cc; /* Premium accent color */
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-toggle.active,
+.tab-toggle:hover {
+  background: linear-gradient(135deg, #0066cc, #004c99);
+  color: #ffffff;
+  border-color: #0066cc;
+  box-shadow: 0 4px 16px rgba(0, 102, 204, 0.25);
+}
+
+.tab-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 240px));
+  justify-content: center; /* center items when <4 */
+  gap: 20px;
+  padding: 8px 12px 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.tab-content.active {
+  display: grid;
+}
+
+/* Cards */
+.pin {
+  background: #ffffff;
+  border: 1.5px solid #e0e6ed; /* Light premium border */
+  border-top: 4px solid #0066cc; /* Accent top border for elegance */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  width: 240px; /* fixed width so grid aligns properly */
+}
+
+.pin:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  border-color: #0066cc; /* Highlight border on hover */
+}
+
+.pin img,
+.pin video {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  background: #f2f4f8;
+  user-select: none;
+}
+
+/* Info Section */
+.pin-info {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pin-info p {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #333333;
+  margin: 0;
+}
+
+.pin-info small {
+  color: #888888;
+  font-size: 0.8rem;
+}
+
+/* Download Button */
+.btn-download {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #00b894, #008c74); /* Premium green gradient */
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-download:hover {
+  background: linear-gradient(135deg, #008c74, #00695c);
+  color: #ffffff;
+}
+
+/* No Preview */
+.no-preview {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f4f8;
+  color: #999999;
+  font-size: 0.85rem;
+  padding: 10px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tab-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 12px auto; /* reduce spacing on mobile */
+  }
+
+  .tab-toggle {
+    width: 80%;
+  }
+
+  .tab-content {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+    justify-content: center; /* ✅ On mobile, center */
+    padding: 8px;
+  }
+
+  .pin {
+    width: 180px;
+  }
+
+  .pin img,
+  .pin video,
+  .no-preview {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pin-info p {
+    font-size: 0.9rem;
+  }
+
+  .btn-download {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}

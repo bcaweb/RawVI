@@ -10,8 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $desc = $_POST['description'];
-    $tags = $_POST['tags'];
-    $user_id = $_SESSION['user_id'];
 
     $upload_dir = 'uploads/';
     if (!is_dir($upload_dir)) mkdir($upload_dir);

@@ -10,9 +10,9 @@
         <h2>Reset Password</h2>
         <form action="forgot_password.php" method="post">
             <input type="email" name="email" placeholder="Enter your email" required>
-            <button type="submit">Send Reset Link</button>
+            <button type="submit">Send OTP</button>
         </form>
-        <p><a href="login.html">Back to Login</a></p>
+        <p><a href="login.php">Back to Login</a></p>
     </div>
 </body>
 </html>

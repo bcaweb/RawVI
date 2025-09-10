@@ -1,76 +1,275 @@
-/* File: css/home.css */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+/* =====================
+   RESET + BASE STYLES
+===================== */
+* {
     margin: 0;
-    padding: 20px;
-    color: #333;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    line-height: 1.6;
 }
 
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h2 {
-    text-align: center;
-    color: #2c3e50;
-}
-
-a {
-    color: #2980b9;
-    text-decoration: none;
-    margin-right: 10px;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.pin-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.pin {
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
     background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
-    transition: 0.3s ease-in-out;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
-
-.pin:hover {
-    box-shadow: 4px 4px 12px rgba(0,0,0,0.1);
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
-
-.pin img {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-    max-height: 180px;
+.logo {
+    height: 50px;
 }
-
-.pin h3 {
-    margin: 10px 0 5px;
-    color: #34495e;
+.nav-link {
+    font-weight: 600;
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s;
 }
-
-.pin p {
+.nav-link:hover {
+    color: #000;
+}
+.btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
     font-size: 14px;
-    color: #666;
+}
+.login {
+    background: #e63946;
+    color: white;
+}
+.signup {
+    background: transparent;
+    border: 2px solid #e63946;
+    color: #e63946;
+}
+.login:hover, .signup:hover {
+    background: #a61b34;
+    color: white;
 }
 
-.pin small {
-    display: block;
-    margin-top: 8px;
-    color: #888;
+/* =====================
+   HEADER
+===================== */
+.header {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to right, #fceabb, #f8b500);
+}
+.header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #222;
+    margin-bottom: 10px;
+}
+.highlight {
+    color: #e63946;
+}
+.header p {
+    font-size: 1.2rem;
+    color: #444;
+}
+
+/* =====================
+   GRID
+===================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 2rem 3rem 4rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* =====================
+   CARD
+===================== */
+.pin-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transform: translateY(20px);
+    animation: floatUp 0.8s ease forwards;
+    opacity: 0;
+    animation-delay: calc(var(--i) * 0.1s);
+    cursor: pointer;
+}
+@keyframes floatUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* =====================
+   IMAGE
+===================== */
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.img-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.pin-card:hover .img-wrapper img {
+    transform: scale(1.1) rotate(1deg);
+}
+
+/* =====================
+   OVERLAY
+===================== */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+.pin-card:hover .overlay {
+    transform: translateY(0);
+}
+.overlay-text h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.overlay-text p {
+    font-size: 0.9rem;
+    color: #f0f0f0;
+    margin-top: 4px;
+}
+
+/* Always show overlay on mobile */
+@media (max-width: 768px) {
+    .overlay {
+        transform: translateY(0);
+    }
+}
+
+/* =====================
+   LOGIN SECTION
+===================== */
+.login-section {
+    height: 100vh; /* full page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #fceabb, #f8b500);
+    text-align: center;
+    padding: 2rem;
+}
+
+.login-section h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #222;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+.login-link {
+    color: #e63946;
+    text-decoration: none;
+    font-weight: 900;
+    position: relative;
+}
+.login-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #e63946;
+    transition: width 0.3s ease;
+}
+.login-link:hover::after {
+    width: 100%;
+}
+
+/* Scroll Animation */
+.login-section h2.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =====================
+   FOOTER
+===================== */
+.footer {
+    background: #222;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+}
+.footer p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.footer .social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.footer .social-links a:hover {
+    color: #e63946;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+    .grid {
+        padding: 1rem;
+        gap: 1.2rem;
+    }
+    .header h1 {
+        font-size: 2.2rem;
+    }
+    .login-section h2 {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 500px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    .header p {
+        font-size: 1rem;
+    }
+    .login-section h2 {
+        font-size: 1.6rem;
+    }
 }

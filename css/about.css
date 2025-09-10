@@ -1,0 +1,192 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #ffffff;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    height: 40px;
+}
+
+.nav-right a {
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: #f8b500;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #f8b500;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: 0.3s ease;
+}
+
+.login {
+    background: #444;
+}
+
+.signup {
+    background: #444444;
+    color: #ffffff;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Hero */
+.hero {
+    height: 60vh;
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #222;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.highlight {
+    color: #fff;
+    background: #f8b500;
+    padding: 0 8px;
+    border-radius: 5px;
+}
+
+/* Mission */
+.mission, .story, .team, .cta {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.mission h2, .features h2, .story h2, .team h2, .cta h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Features */
+.features {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+}
+
+.feature-card span {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+/* Story */
+.story {
+    background: #fff7e6;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Team */
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.team-card {
+    width: 200px;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.team-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;   /* crops image nicely */
+    border-radius: 50%;  /* perfect circle */
+    margin-bottom: 1rem;
+}
+
+
+/* CTA */
+.cta {
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    color: #222;
+    padding: 4rem 2rem;
+}
+
+.cta-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background: #222;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.cta-btn:hover {
+    background: #444;
+}
+
+/* Footer */
+.footer {
+    background: #222;
+    color: #aaa;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.footer .socials a {
+    color: #f8b500;
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.footer .socials a:hover {
+    text-decoration: underline;
+}
