@@ -35,7 +35,7 @@ if (!isset($_SESSION['email'])) {
   </div>
   <a href="user.php"><i class="fas fa-users"></i> Users</a>
   <a href="reports.php"><i class="fas fa-file-alt"></i> Reports</a>
-  <a href="pending.php"><i class="fas fa-spinner fa-spin"></i> Pending</a>
+  
 
   <div class="admin-info">
     <p>Welcome, <?php echo htmlspecialchars($_SESSION['email']); ?> 👋</p>

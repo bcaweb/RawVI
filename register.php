@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $stmt->insert_id;
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $role;
-                header("Location: home.php");
+                header("Location: login.php");
                 exit();
             } else {
                 $error = "Registration failed. Please try again.";

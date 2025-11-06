@@ -26,6 +26,52 @@ $result = $conn->query($query);
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RawVI — Showcase Your Talent</title>
   <link rel="stylesheet" href="css/home.css" />
+ <style>
+/* Fixed bottom Read More section with glass effect */
+.readmore-section {
+    position: fixed;
+    bottom: 20px;              /* slightly above the bottom edge */
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 90%;
+    max-width: 600px;          /* smaller and centered */
+    background: rgba(255, 255, 255, 0.12); /* glass-like effect */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 14px;
+    color: #fff;
+    padding: 18px 22px;
+    z-index: 999;
+    max-height: 25%;           /* smaller height */
+    overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+    opacity: 0;
+}
+.readmore-section.active {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+.readmore-close {
+    cursor: pointer;
+    float: right;
+    font-size: 16px;
+    font-weight: bold;
+    color: #00c8ff;
+}
+.readmore-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #0f555eff;
+}
+.readmore-section p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1c2324ff;
+}
+</style>
+
 </head>
 <body>
 
@@ -43,6 +89,14 @@ $result = $conn->query($query);
   <button type="submit">Search</button>
 </form>
 
+<!-- Fixed Read More Section -->
+<section class="readmore-section" id="readmoreSection">
+  <span class="readmore-close" onclick="closeReadMore()">✖</span>
+  <h3>Click Read More to view details</h3>
+  <p>The full description of selected content will appear here.</p>
+</section>
+
+<!-- Content Grid -->
 <div id="pinGrid">
   <?php
   if ($result && $result->num_rows > 0) {
@@ -95,12 +149,7 @@ $result = $conn->query($query);
   ?>
 </div>
 
-<!-- Read More Section -->
-<section class="readmore-section">
-  <h3>Click Read More to view details</h3>
-  <p>The full description of selected content will appear here.</p>
-</section>
-
+<!-- Modal for preview -->
 <div id="contentModal" class="modal">
   <span class="modal-close" onclick="closeModal()">&times;</span>
   <div class="modal-content" id="modalBody"></div>
@@ -152,11 +201,18 @@ function logDownload(contentId, filePath) {
   document.body.removeChild(link);
 }
 
-// Read More Function
 function showReadMore(title, desc) {
-  const section = document.querySelector('.readmore-section');
-  section.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
-  section.scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById('readmoreSection');
+    section.innerHTML = `<span class="readmore-close" onclick="closeReadMore()">✖</span>
+                         <h3>${title}</h3>
+                         <p>${desc}</p>`;
+    section.classList.add('active');
+    section.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeReadMore() {
+  const section = document.getElementById('readmoreSection');
+  section.classList.remove('active');
 }
 </script>
 

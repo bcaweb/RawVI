@@ -170,6 +170,7 @@ small { display:block; margin-bottom:10px; color:#ffd700; }
       <option value="Tech">Tech</option>
       <option value="Festival">Festival</option>
       <option value="Nature">Nature</option>
+       <option value="Geography">Geography</option>
     </select>
 
     <label>Content Type</label>
